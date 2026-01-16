@@ -11,6 +11,7 @@
     justify-content: center;
     background: white;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .logo h2 {
@@ -27,10 +28,14 @@
     margin-bottom: 15px;
 }
 
-@media (max-width: 1050px) {
-
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
+input[type='date'], .gender-icon {
+    margin-bottom: 1.3rem;
 }
+
+#registration-error {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
