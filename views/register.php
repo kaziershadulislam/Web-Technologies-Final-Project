@@ -1,5 +1,13 @@
+<?php
+
+session_start();
+$errors = $_SESSION['errors'] ?? [];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +16,7 @@
     <link rel="stylesheet" href="../assets/styles/register.css">
     <title>Better Health - Registration</title>
 </head>
+
 <body>
     <div class="container">
         <div class="image-section">
@@ -35,79 +44,84 @@
                 </li>
             </ul>
         </div>
-        
+
         <div class="form-section">
             <div class="logo">
                 <h2>Registration</h2>
                 <p>Better Health Appointment System</p>
             </div>
-            
-            <form class="registration-form">
+
+            <form class="registration-form" onsubmit="return validateRegistration(event)" action="../controllers/registerController.php" method="POST">
                 <div class="form-row">
                     <div class="input-group">
-                        <label for="firstName">First Name</label>
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="firstName" placeholder="Enter your first name" required>
+                        <img src="../assets/icons/user.svg" alt="icon">
+                        <input name="fname" type="text" id="firstName" placeholder="Enter your first name">
+                        <span class="error-message" id="fname-error"><?php echo $errors['fname'] ?? ''; ?></span>
                     </div>
-                    
+
                     <div class="input-group">
-                        <label for="lastName">Last Name</label>
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="lastName" placeholder="Enter your last name" required>
+                        <img src="../assets/icons/user.svg" alt="icon">
+                        <input name="lname" type="text" id="lastName" placeholder="Enter your last name">
+                        <span class="error-message" id="lname-error"><?php echo $errors['lname'] ?? ''; ?></span>
                     </div>
                 </div>
-                
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="Enter your email address" required>
-                </div>
-                
+
                 <div class="form-row">
                     <div class="input-group">
-                        <label for="password">Password</label>
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Create a password" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <img src="../assets/icons/mail-blue.svg" alt="icon">
+                        <input name="email" type="email" id="email" placeholder="Enter your email address">
+                        <span class="error-message" id="email-error"><?php echo $errors['email'] ?? ''; ?></span>
                     </div>
                 </div>
-                
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <img src="../assets/icons/lock.svg" alt="icon">
+                        <input name="password" type="password" id="password" placeholder="Create a password">
+                        <span class="error-message" id="password-error"><?php echo $errors['password'] ?? ''; ?></span>
+                    </div>
+
+                    <div class="input-group">
+                        <img src="../assets/icons/lock.svg" alt="icon">
+                        <input name="confirmPassword" type="password" id="confirmPassword"
+                            placeholder="Confirm your password">
+                        <span class="error-message" id="confirmPassword-error"><?php echo $errors['confirmPassword'] ?? ''; ?></span>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="input-group">
                         <label for="dob">Date of Birth</label>
-                        <i class="fas fa-calendar"></i>
-                        <input type="date" id="dob" required>
+                        <img src="../assets/icons/calendar-blue.svg" alt="icon">
+                        <input name="dob" type="date" id="dob">
+                        <span class="error-message" id="dob-error"><?php echo $errors['dob'] ?? ''; ?></span>
                     </div>
-                    
+
                     <div class="input-group">
                         <label for="gender">Gender</label>
-                        <i class="fas fa-venus-mars"></i>
-                        <select id="gender" required>
+                        <img src="../assets/icons/gender.svg" alt="icon" class="gender-icon">
+                        <select name="gender" id="gender">
                             <option value="">Select gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="other">Other</option>
                         </select>
+                        <span class="error-message" id="gender-error"><?php echo $errors['gender'] ?? ''; ?></span>
                     </div>
                 </div>
-                
-                
+
+
                 <button type="submit" class="register-button">Create Account</button>
-                
+                <span class="error-message" id="registration-error"><?php echo $errors['registration'] ?? ''; ?></span>
+
                 <div class="login-link">
-                    Already have an account? <a href="./login.html">Log in</a>
+                    Already have an account? <a href="./login.php">Log in</a>
                 </div>
             </form>
         </div>
     </div>
 
-    <script>
-        
-    </script>
+    <script src="../assets/scripts/register.js"></script>
 </body>
+
 </html>

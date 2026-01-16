@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+$errors = $_SESSION['errors'] ?? [];
+// $errors['login'] = 'yummy';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,29 +53,32 @@
                 <p>Better Health Appointment System</p>
             </div>
 
-            <form class="login-form">
+            <form class="login-form" onsubmit="return validateLogin(event)" action="../controllers/loginController.php" method="POST">
                 <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Email" required>
+                    <img src="../assets/icons/user.svg" alt="icon">
+                    <input name="email" type="text" placeholder="Email">
+                    <span class="error-message" id="email-error"><?php echo $errors['email'] ?? ''; ?></span>
                 </div>
 
                 <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" required>
+                    <img src="../assets/icons/lock.svg" alt="icon">
+                    <input name="password" type="password" placeholder="Password">
+                    <span class="error-message" id="password-error"><?php echo $errors['password'] ?? ''; ?></span>
                 </div>
 
                 <div class="remember-forgot">
                     <!-- <label>
                         <input type="checkbox"> Remember me
                     </label> -->
-                    <a href="./forgot_password.html">Forgot password?</a>
+                    <a href="./forgot_password.php">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="login-button">Login to Your Account</button>
+                <span class="error-message" id="login-error"><?php echo $errors['login'] ?? ''; ?></span>
             </form>
 
             <div class="signup-link">
-                Don't have an account? <a href="./register.html">Sign up now</a>
+                Don't have an account? <a href="./register.php">Sign up now</a>
             </div>
         </div>
     </div>
